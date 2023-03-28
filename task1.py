@@ -71,3 +71,40 @@ m = input_number("Введите кол-во элементов второго �
 arr1 = [input_number("Введите " + str(i+1) + " элемент 1го мн-ва" ) for i in range(n)]
 arr2 = [input_number("Введите " + str(i+1) + " элемент 2го мн-ва" ) for i in range(m)]
 print(set(arr1).difference(set(arr2)))
+
+#######################################################################################
+
+def input_num(message: str) -> int:
+    input_error: bool = True
+    while input_error:
+        try:
+            temp = int(input(message))
+        except ValueError:
+            print("Вы ввели не число!")
+        else:
+            input_error = False
+            return temp
+
+
+def input_list(message: str) -> list:
+    temp_list = []
+    for i in range(input_num('Please input size of ' + message + ': ')):
+        temp_list.append(input_num(f'{i + 1} element of {message}: '))
+    print('-' * 20)
+    return temp_list
+
+
+def n_minus_m(n_local: list, m_local: list) -> list:
+    n_edit = []
+    m_local = set(m_local)
+    for i in n_local:
+        if i in m_local:
+            n_edit.append(i)
+    return n_edit
+
+
+n, m = [input_list(x) for x in ('list N', ' list M')]
+print(n, m)
+n_m = [i for i in n if i not in m]
+print(*n_m)
+print(*n_minus_m(n, m))
